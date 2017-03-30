@@ -1,4 +1,4 @@
-
+.gitignore
 __pycache__/omnes_functions.cpython-35.pyc
 
 .idea/.name
