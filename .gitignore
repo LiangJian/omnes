@@ -1,5 +1,5 @@
 .gitignore
-__pycache__/omnes_functions.cpython-35.pyc
+__pycache__/*.pyc
 
 .idea/.name
 
