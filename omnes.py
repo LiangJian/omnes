@@ -1,4 +1,4 @@
-#!//opt/local/bin/python3
+#!/opt/local/bin/python3
 import numpy as np
 import scipy.integrate as integrate
 import matplotlib.pyplot as plt
@@ -25,4 +25,3 @@ for i in range(0, x.size):
 
 plt.plot(x, y)
 plt.show()
-

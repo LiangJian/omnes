@@ -1,10 +1,10 @@
-#!//opt/local/bin/python3
+#!/opt/local/bin/python3
 import numpy as np
 import scipy.integrate as integrate
 
 
-m_pi_plus = 139.0
-m_pi_zero = 135.0
+m_pi_plus = 139.57
+m_pi_zero = 134.98
 m_pi = 1/3.*(2*m_pi_plus + m_pi_zero)
 
 A = np.array([.220, .0379, -.0444])
@@ -13,7 +13,7 @@ C = np.array([-.0139, -.673e-4, -.221e-2])
 D = np.array([-.139e-2, .163e-7, -.129e-3])
 S_zero = np.array([36.77, 30.72, -21.62])
 S_zero *= m_pi
-limit = np.inf
+upper_limit = np.inf
 
 
 def q(s):
@@ -65,11 +65,11 @@ def delta_s_2(s):
 
 def integrate_delta(index):
     if index == 0:
-        return integrate.quad(delta_s_0, 4*m_pi**2, limit)[0]
+        return integrate.quad(delta_s_0, 4*m_pi**2, upper_limit)[0]
     if index == 1:
-        return integrate.quad(delta_s_1, 4*m_pi**2, limit)[0]
+        return integrate.quad(delta_s_1, 4*m_pi**2, upper_limit)[0]
     if index == 2:
-        return integrate.quad(delta_s_2, 4*m_pi**2, limit)[0]
+        return integrate.quad(delta_s_2, 4*m_pi**2, upper_limit)[0]
 
 
 def part2(index):
@@ -103,19 +103,19 @@ def principle_integration_delta(s, index):
             def tmp(s_prime_):
                 return delta_s_prime_0(s, s_prime_)
             integral_1 = integrate.quad(tmp, 4*m_pi**2, s-epsilon)[0]
-            integral_2 = integrate.quad(tmp, s+epsilon, limit)[0]
+            integral_2 = integrate.quad(tmp, s+epsilon, upper_limit)[0]
 
         if index == 1:
             def tmp(s_prime_):
                 return delta_s_prime_1(s, s_prime_)
             integral_1 = integrate.quad(tmp, 4*m_pi**2, s-epsilon)[0]
-            integral_2 = integrate.quad(tmp, s+epsilon, limit)[0]
+            integral_2 = integrate.quad(tmp, s+epsilon, upper_limit)[0]
 
         if index == 2:
             def tmp(s_prime_):
                 return delta_s_prime_2(s, s_prime_)
             integral_1 = integrate.quad(tmp, 4*m_pi**2, s-epsilon)[0]
-            integral_2 = integrate.quad(tmp, s+epsilon, limit)[0]
+            integral_2 = integrate.quad(tmp, s+epsilon, upper_limit)[0]
 
         new = float(integral_1 + integral_2)
         if new == float('NaN'):
@@ -168,19 +168,19 @@ def principle_integration_delta_ori(s, index):
             def tmp(s_prime_):
                 return delta_s_prime_ori_0(s, s_prime_)
             integral_1 = integrate.quad(tmp, 4*m_pi**2, s-epsilon)[0]
-            integral_2 = integrate.quad(tmp, s+epsilon, limit)[0]
+            integral_2 = integrate.quad(tmp, s+epsilon, upper_limit)[0]
 
         if index == 1:
             def tmp(s_prime_):
                 return delta_s_prime_ori_1(s, s_prime_)
             integral_1 = integrate.quad(tmp, 4*m_pi**2, s-epsilon)[0]
-            integral_2 = integrate.quad(tmp, s+epsilon, limit)[0]
+            integral_2 = integrate.quad(tmp, s+epsilon, upper_limit)[0]
 
         if index == 2:
             def tmp(s_prime_):
                 return delta_s_prime_ori_2(s, s_prime_)
             integral_1 = integrate.quad(tmp, 4*m_pi**2, s-epsilon)[0]
-            integral_2 = integrate.quad(tmp, s+epsilon, limit)[0]
+            integral_2 = integrate.quad(tmp, s+epsilon, upper_limit)[0]
 
         new = float(integral_1 + integral_2)
         if new == float('NaN'):
