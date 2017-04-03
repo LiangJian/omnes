@@ -3,16 +3,20 @@ import numpy as np
 import scipy.integrate as integrate
 
 
-m_pi_plus = 139.57
-m_pi_zero = 134.98
+m_pi_plus = 139.570
+m_pi_zero = 134.977
 m_pi = 1/3.*(2*m_pi_plus + m_pi_zero)
+m_eta = 547.862
+
+s_minimum = 4*m_pi**2
+s_maximum = (m_eta - m_pi)**2
 
 A = np.array([.220, .0379, -.0444])
 B = np.array([.268, .140e-4, -.0857])
 C = np.array([-.0139, -.673e-4, -.221e-2])
 D = np.array([-.139e-2, .163e-7, -.129e-3])
 S_zero = np.array([36.77, 30.72, -21.62])
-S_zero *= m_pi
+S_zero *= m_pi**2
 upper_limit = np.inf
 
 
@@ -50,7 +54,7 @@ def part3(s, index):
 def delta(s, index):
     return np.arctan(tan_delta(s, index))
 
-
+'''''
 def delta_s_0(s):
     return delta(s, 0)/s
 
@@ -139,6 +143,7 @@ def part1(s, index):
 
 def omega(s, index):
     return part1(s, index) * part2(index) * part3(s, index)
+'''''
 
 
 def delta_s_prime_ori_0(s, s_prime):
@@ -196,3 +201,9 @@ def principle_integration_delta_ori(s, index):
             epsilon *= step
 
     return old
+
+
+def omega_function(s, index):
+    return np.exp(s/np.pi * principle_integration_delta_ori(s, index)) * part3(s, index)
+
+
