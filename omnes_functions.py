@@ -17,6 +17,16 @@ C = np.array([-.0139, -.673e-4, -.221e-2])
 D = np.array([-.139e-2, .163e-7, -.129e-3])
 S_zero = np.array([36.77, 30.72, -21.62])
 S_zero *= m_pi**2
+
+A /= m_pi**(0)
+B /= m_pi**(2)
+C /= m_pi**(4)
+D /= m_pi**(6)
+A[1] /= m_pi**(2)
+B[1] /= m_pi**(2)
+C[1] /= m_pi**(2)
+D[1] /= m_pi**(2)
+
 upper_limit = np.inf
 
 
@@ -52,7 +62,11 @@ def part3(s, index):
 
 
 def delta(s, index):
-    return np.arctan(tan_delta(s, index))
+    temp_delta = np.arctan(tan_delta(s, index))
+    if index == 1 or index == 0:
+        if temp_delta < 0:
+            temp_delta += np.pi
+    return temp_delta
 
 '''''
 def delta_s_0(s):
@@ -162,8 +176,8 @@ def principle_integration_delta_ori(s, index):
 
     epsilon = 0.01
     old = 0.0
-    cut = 1e-8
-    step = 0.5
+    cut = 1e-10
+    step = 0.4
 
     while True:
         integral_1 = .0
@@ -192,6 +206,7 @@ def principle_integration_delta_ori(s, index):
             print("principle integration meets nan.")
             break
         if new == float('Inf') or new == -float('Inf'):
+            print(index)
             print("principle integration meets inf.")
             break
         if np.abs(new - old) < cut:
@@ -206,4 +221,18 @@ def principle_integration_delta_ori(s, index):
 def omega_function(s, index):
     return np.exp(s/np.pi * principle_integration_delta_ori(s, index)) * part3(s, index)
 
+a_s = -0.672
+b_s = -1.008
+c_s = 30.45
+s_tilde = -125.7
 
+a_s /= 100.0*m_pi**2
+c_s *= m_pi**2
+s_tilde *= m_pi**2
+
+def g_susan(s):
+    u = factor_head(s)
+    return -1.0/np.pi * u*np.log((1+u)/(1-u)) + 1j*u
+
+def omega_1_Susan(s):
+    return (c_s - 2.0*m_pi**2/np.pi)/s_tilde * (s_tilde-s)/(a_s*s**2+b_s*s+c_s-(s-4.0*m_pi**2)/4.0*g_susan(s))
