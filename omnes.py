@@ -37,6 +37,21 @@ y_2_real = x.copy()
 y_s_1_real = x.copy()
 y_s_test_real = x.copy()
 
+x = [0, 1, 2, 3, 4]
+y = x
+#np.polynomial.chebyshev.chebfit(x, y, 5)
+
+
+#x = np.arange(of.s_minimum + 100, of.s_maximum, 2000)
+D = 0.8
+x = np.arange(2*of.m_pi/1000+0.04, 2*of.m_pi/1000+D, D/400.)
+print(x.shape)
+y_0_real = x.copy()
+y_1_real = x.copy()
+y_2_real = x.copy()
+y_s_1_real = x.copy()
+y_s_test_real = x.copy()
+
 y_0_imaginary = x.copy()
 y_1_imaginary = x.copy()
 y_2_imaginary = x.copy()
