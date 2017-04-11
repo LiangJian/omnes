@@ -63,11 +63,16 @@ def part3(s, index):
 
 def delta(s, index):
     temp_delta = np.arctan(tan_delta(s, index))
+<<<<<<< Updated upstream
     if index == 0:
         if s > S_zero[0]:
             temp_delta += np.pi
     if index == 1:
         if s > S_zero[1]:
+=======
+    if index == 1:
+        if temp_delta < 0:
+>>>>>>> Stashed changes
             temp_delta += np.pi
     return temp_delta
 

@@ -32,3 +32,7 @@ omnes_delta_0_positive.pdf
 omnes_fitA.pdf
 
 omnes_fitB.pdf
+
+*.txt
+
+out.txt

@@ -44,7 +44,7 @@ y = x
 
 #x = np.arange(of.s_minimum + 100, of.s_maximum, 2000)
 D = 0.8
-x = np.arange(2*of.m_pi/1000+0.04, 2*of.m_pi/1000+D, D/400.)
+x = np.arange(2*of.m_pi/1000+0.04, 2*of.m_pi/1000+D, D/800.)
 print(x.shape)
 y_0_real = x.copy()
 y_1_real = x.copy()
